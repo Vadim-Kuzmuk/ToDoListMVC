@@ -1,0 +1,82 @@
+﻿@model TasksAndCategoriesViewModel
+@{
+    ViewData["Title"] = "ToDoListMVC";
+
+    var categoriesToDict = Model.Categories.ToDictionary(i => i.id, i => i.name);
+}
+
+<div class="container">
+    <form method="post" class="mb-5 col-lg-5 text-center">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="list-group-item list-group-item-primary">
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id" class="form-select">
+                @foreach(var item in Model.Categories)
+                {
+                    <option value="@item.id">@item.name</option>
+                }
+            </select>
+        </div>
+        <div class="list-group-item list-group-item-primary">
+            <label for="name">Task</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Task" />
+        </div>
+        <div class="list-group-item list-group-item-primary mb-4">
+            <label for="due_date">DueDate</label>
+            <input type="datetime-local" class="form-control" id="due_date" name="due_date" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
+    <div class="list-group col-lg-6 text-center">
+        @foreach(var item in Model.Tasks)
+        {
+            string bgColor = "list-group-item-success";
+            if (item.is_completed)
+            {
+                bgColor = "list-group-item-info";
+            }
+            else if (item.due_date == null)
+            {
+                bgColor = "";
+            }
+            else
+            {
+                DateTime dueDate = (DateTime)item.due_date;
+                TimeSpan timeDiff = dueDate - DateTime.Now;
+                if (timeDiff.TotalDays <= 0)
+                {
+                    bgColor = "list-group-item-danger";
+                }
+                else if (timeDiff.TotalDays > 0 && timeDiff.TotalDays < 3)
+                {
+                    bgColor = "list-group-item-warning";
+                }
+            }
+
+            <div class="list-group-item @bgColor">
+                <div class="d-flex justify-content-between flex-column">
+                    <h4 class="mb-2">@item.name</h4>
+                    @if (item.due_date is not null)
+                    {
+                        <p>@item.due_date</p>
+                    }
+                </div>
+                <p class="mb-2">Category: @categoriesToDict[item.category_id]</p>
+
+                <a asp-action="CompleteTask" asp-route-id="@item.id" class="btn btn-success">
+                    @if (item.is_completed)
+                    {
+                        <span>Uncompleted</span>
+                    }
+                    else
+                    {
+                        <span>Completed</span>
+                    }
+                </a>
+                <a asp-action="DeleteTask" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+            </div>
+        }
+    </div>
+</div>
