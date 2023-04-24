@@ -26,6 +26,7 @@
             <label for="due_date">DueDate</label>
             <input type="datetime-local" class="form-control" id="due_date" name="due_date" />
         </div>
+        <input type="hidden" id="type" name="type" value="@Model.Type" />
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 
@@ -65,7 +66,7 @@
                 </div>
                 <p class="mb-2">Category: @categoriesToDict[item.category_id]</p>
 
-                <a asp-action="CompleteTask" asp-route-id="@item.id" class="btn btn-success">
+                <a asp-action="CompleteTask" asp-route-id="@item.id" asp-route-type="@Model.Type" class="btn btn-success">
                     @if (item.is_completed)
                     {
                         <span>Uncompleted</span>
@@ -75,7 +76,7 @@
                         <span>Completed</span>
                     }
                 </a>
-                <a asp-action="DeleteTask" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+                <a asp-action="DeleteTask" asp-route-id="@item.id" asp-route-type="@Model.Type" class="btn btn-danger">Delete</a>
             </div>
         }
     </div>

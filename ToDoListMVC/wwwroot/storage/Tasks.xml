@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tasks>
+  <Task id="1" category_id="1" name="Learn SQL Server2" due_date="13.04.2023 12:30:00" is_completed="True" />
+  <Task id="2" category_id="2" name="Create MVC app with Xml" due_date="25.04.2023 12:00:00" is_completed="False" />
+  <Task id="3" category_id="3" name="Help dad" due_date="26.04.2023 12:00:00" is_completed="false" />
+  <Task id="4" category_id="4" name="Buy products2" due_date="27.04.2023 12:00:00" is_completed="false" />
+  <Task id="5" category_id="5" name="Watch tv" due_date="28.04.2023 12:00:00" is_completed="false" />
+</Tasks>

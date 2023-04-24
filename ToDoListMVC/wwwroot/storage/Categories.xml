@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Categories>
+  <Category id="1" name="Study2" />
+  <Category id="2" name="Job2" />
+  <Category id="3" name="Family2" />
+  <Category id="4" name="Products2" />
+  <Category id="5" name="Other2" />
+</Categories>
