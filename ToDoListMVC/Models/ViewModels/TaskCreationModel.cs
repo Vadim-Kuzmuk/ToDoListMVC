@@ -12,7 +12,5 @@ namespace ToDoListMVC.Models.DTO
 
         [Required]
         public DateTime? due_date { get; set; } = null!;
-
-        public string type { get; set; } = "mysql";
     }
 }

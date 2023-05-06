@@ -8,15 +8,15 @@ using ToDoListMVC.Repository.Interfaces;
 
 namespace ToDoListMVC.Repository
 {
-    public class TasksXmlRepository : ITasksXmlRepository
+    public class TasksXmlRepository : ITaskRepository
     {
         private readonly string pathTasks;
         private readonly string pathCategories;
 
-        public TasksXmlRepository(IWebHostEnvironment env)
+        public TasksXmlRepository(IWebHostEnvironment env, IConfiguration configuration)
         {
-            pathTasks = string.Concat(env.WebRootPath, "/storage/Tasks.xml");
-            pathCategories = string.Concat(env.WebRootPath, "/storage/Categories.xml");
+            pathTasks = string.Concat(env.WebRootPath, configuration.GetConnectionString("Tasks"));
+            pathCategories = string.Concat(env.WebRootPath, configuration.GetConnectionString("Categories"));
         }
 
         public async Task CompleteTasksAsync(int id)

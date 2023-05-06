@@ -6,7 +6,18 @@
 }
 
 <div class="container">
-    <form method="post" class="mb-5 col-lg-5 text-center">
+    <form asp-action="SwitchSourceData" method="post" class="mb-5 col-lg-5 text-center">
+        <div class="form-group mb-2">
+            <label for="sourse">Source Data</label>
+            <select id="sourse" name="sourse" class="form-select">
+                <!option value="mysql" @(Model.Type == "mysql" ? "selected" : "")>MySql</!option>
+                <!option value="xml" @(Model.Type == "xml" ? "selected" : "")>Xml</!option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Switch</button>
+    </form>
+
+    <form asp-action="Index" method="post" class="mb-5 col-lg-5 text-center">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="list-group-item list-group-item-primary">
