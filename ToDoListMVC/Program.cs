@@ -1,4 +1,6 @@
+using GraphQL;
 using ToDoListMVC.Context;
+using ToDoListMVC.GraphQL.Schemas;
 using ToDoListMVC.Repository;
 using ToDoListMVC.Repository.Interfaces;
 
@@ -8,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddSingleton<RepositorySwitcher>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddGraphQL(builder => builder
+            .AddSystemTextJson()
+            .AddSchema<TaskSchema>()
+            .AddGraphTypes(typeof(TaskSchema).Assembly));
 
 var app = builder.Build();
 
@@ -25,6 +32,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseGraphQL<TaskSchema>();
+app.UseGraphQLAltair();
 
 app.MapControllerRoute(
     name: "default",
